@@ -1,8 +1,9 @@
 #include <iostream>
+#include <stdexcept>
 
-struct Book
+struct Book //использованы структруры как сказано по ТЗ
 {
-private:
+private: //поля структуры инкапсуоированы в private чтобы избежать изменения полей и получения ошибок из-за этого
     std::string name;
     std::string author;
     unsigned int year;
@@ -11,7 +12,7 @@ private:
 public:
     Book(std::string n, std::string a, unsigned int y, unsigned int p)
     {
-        if(n.empty() || a.empty() || y > 2025)
+        if(n.empty() || a.empty() || y > 2025) //проверка на то что было корректно введено название, автор и год
             throw std::invalid_argument("Нет такой книги!");
 
         name = n;
@@ -19,16 +20,16 @@ public:
         year = y;
         pages = p;
     }
-    Book() { }
+    Book() : name(""), author(""), year(0), pages(0) {} //книга-заглушка
 
-    unsigned int getPages() { return pages; }
-    std::string getAuthor() { return author; }
+    unsigned int getPages() const { return pages; } //геттеры
+    std::string getAuthor() const { return author; }
 };
 
 unsigned int counting(Book* books)
 {
     unsigned int all_pages{0};
-    for(unsigned i = 0; !books[i].getAuthor().empty(); i++)
+    for(unsigned i = 0; !books[i].getAuthor().empty(); i++) //проверка является ли книга заглушкой
         all_pages += books[i].getPages();
 
     return all_pages;
@@ -47,7 +48,7 @@ int main()
         // и могу использовать только стандартный массив C++. Т.о. нет проверка конца массива осуществляется с 
         // помощью книги-заглушки чтобы избежать UB и выхода за границу
 
-        //Book book_error{"QWE", "", 2022, 211}; проверка исключения 
+        //Book book_error{"", "", 2022, 211}; проверка исключения 
 
         Book books[]{book1, book2, book3, book_empty};
 
