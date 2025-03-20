@@ -2,11 +2,13 @@
 
 struct Book
 {
+private:
     std::string name;
     std::string author;
     unsigned int year;
     unsigned int pages;
 
+public:
     Book(std::string n, std::string a, unsigned int y, unsigned int p)
     {
         if(n.empty() || a.empty() || y > 2025)
@@ -18,13 +20,16 @@ struct Book
         pages = p;
     }
     Book() { }
+
+    unsigned int getPages() { return pages; }
+    std::string getAuthor() { return author; }
 };
 
 unsigned int counting(Book* books)
 {
     unsigned int all_pages{0};
-    for(unsigned i = 0; !books[i].author.empty(); i++)
-        all_pages += books[i].pages;
+    for(unsigned i = 0; !books[i].getAuthor().empty(); i++)
+        all_pages += books[i].getPages();
 
     return all_pages;
 }

@@ -1,5 +1,5 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/alexey/Projects/tasks/main'
+binary-path:     '/Users/alexey/Projects/task1/main'
 relocations:     []
 ...
